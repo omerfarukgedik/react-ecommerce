@@ -1,27 +1,17 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { SET_COUNT } from './store';
-import Header from './components/Header';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/home.jsx';
+import Detail from './pages/detail.jsx';
 
-function App() {
-  const count = useSelector((store) => store.counter);
-  const dispatch = useDispatch();
-
+const App = () => {
   return (
-    <>
-      <Header />
-      <div className='p-5 flex flex-col min-h-screen'>
-        <h1 className='text-3xl font-bold underline'>Hello world!</h1>
-
-        <div className='flex flex-col py-2'>Vite + React + Tailwind CSS</div>
-
-        <div>
-          <button onClick={() => dispatch(SET_COUNT(1))}>Arttır</button>
-          {count.value}
-          <button onClick={() => dispatch(SET_COUNT(-1))}>Azalt</button>
-        </div>
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path=':id' element={<Detail />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
