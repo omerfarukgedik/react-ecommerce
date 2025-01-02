@@ -7,7 +7,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
@@ -22,21 +22,40 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+header {
+  @apply bg-[#2A59FE] flex justify-center;
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  .wrapper {
+    @apply container p-2 xl:h-[50px] text-white grid gap-1 xl:gap-4 items-center grid-cols-[220px,1fr,220px];
+    grid-template-areas: 'logo search actions';
+
+    h1 {
+      @apply text-[1.5rem] font-bold w-auto xl:w-[220px];
+      grid-area: logo;
+    }
+
+    input {
+      @apply bg-white py-1 px-4 rounded-sm w-auto xl:w-[400px] text-black;
+      grid-area: search;
+    }
+
+    .actions {
+      @apply w-auto xl:w-[220px] flex justify-end items-center text-right gap-4;
+      grid-area: actions;
+    }
+
+    @media screen and (max-width: 1024px) {
+      grid-template-columns: unset;
+      grid-template-areas:
+        'logo actions actions'
+        'search search search';
+    }
+  }
 }
 
 button {
@@ -56,17 +75,4 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: white) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
