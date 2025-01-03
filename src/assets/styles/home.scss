@@ -7,10 +7,11 @@
 
     #filter_area {
       grid-area: filter;
+      @apply grid grid-cols-1 md:grid-cols-2 gap-2 py-5 lg:p-0 lg:flex lg:flex-col lg:gap-4;
     }
     #products_area {
       grid-area: products;
-      @apply grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 xl:gap-6;
+      @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xl:gap-6;
     }
     #summary_area {
       grid-area: summary;
@@ -26,7 +27,7 @@
   }
 
   .product {
-    @apply bg-white p-2 rounded-md shadow-md flex flex-col justify-between gap-2;
+    @apply bg-white p-2 rounded-md shadow-md flex flex-col justify-between gap-2 cursor-pointer;
 
     img {
       @apply w-full object-contain rounded-md max-h-[200px];
