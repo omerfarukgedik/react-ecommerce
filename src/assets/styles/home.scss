@@ -2,7 +2,7 @@
   @apply flex justify-center text-black;
 
   .wrapper {
-    @apply container p-2 grid grid-cols-[220px,1fr,220px] gap-1 xl:gap-10;
+    @apply container px-2 lg:px-0 grid grid-cols-[220px,1fr,220px] gap-1 xl:gap-10;
     grid-template-areas: 'filter products summary';
 
     #filter_area {
@@ -10,6 +10,7 @@
     }
     #products_area {
       grid-area: products;
+      @apply grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 xl:gap-6;
     }
     #summary_area {
       grid-area: summary;
@@ -21,6 +22,26 @@
         'summary summary summary'
         'filter filter filter'
         'products products products';
+    }
+  }
+
+  .product {
+    @apply bg-white p-2 rounded-md shadow-md flex flex-col justify-between gap-2;
+
+    img {
+      @apply w-full object-contain rounded-md max-h-[200px];
+    }
+
+    &__info {
+      @apply flex flex-col gap-2;
+
+      span {
+        @apply text-[#2A59FE];
+      }
+    }
+
+    button {
+      @apply bg-[#2A59FE] text-white py-2 px-4 rounded-md;
     }
   }
 }
