@@ -1,12 +1,14 @@
+import '../assets/styles/home.scss';
+
 function Home() {
   return (
-    <>
-      <div className='p-5 flex flex-col min-h-screen'>
-        <h1 className='text-3xl font-bold underline'>Hello world!</h1>
-
-        <div className='flex flex-col py-2'>Vite + React + Tailwind CSS</div>
+    <main id='home'>
+      <div className='wrapper'>
+        <section id='filter_area'>Filter Area</section>
+        <section id='products_area'>Products</section>
+        <section id='summary_area'>Summary</section>
       </div>
-    </>
+    </main>
   );
 }
 

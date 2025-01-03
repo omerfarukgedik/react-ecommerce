@@ -1,0 +1,26 @@
+#home {
+  @apply flex justify-center text-black;
+
+  .wrapper {
+    @apply container p-2 grid grid-cols-[220px,1fr,220px] gap-1 xl:gap-10;
+    grid-template-areas: 'filter products summary';
+
+    #filter_area {
+      grid-area: filter;
+    }
+    #products_area {
+      grid-area: products;
+    }
+    #summary_area {
+      grid-area: summary;
+    }
+
+    @media screen and (max-width: 1024px) {
+      grid-template-columns: unset;
+      grid-template-areas:
+        'summary summary summary'
+        'filter filter filter'
+        'products products products';
+    }
+  }
+}
