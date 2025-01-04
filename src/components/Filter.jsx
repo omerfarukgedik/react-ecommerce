@@ -1,6 +1,7 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Card from './Card';
 import { useState } from 'react';
+import makeSlug from '../hooks/makeSlug';
 
 const sort = [
   {
@@ -21,41 +22,18 @@ const sort = [
   },
 ];
 
-const brandsArray = [
-  {
-    key: 'apple',
-    value: 'Apple',
-  },
-  {
-    key: 'samsung',
-    value: 'Samsung',
-  },
-  {
-    key: 'huawei',
-    value: 'Huawei',
-  },
-];
+const brandsArray = ['Apple', 'Samsung', 'Huawei', 'Xiaomi Redmi'];
 
-const modelsArray = [
-  {
-    key: '11_pro',
-    value: '11 Pro',
-  },
-  {
-    key: '12',
-    value: '12',
-  },
-  {
-    key: '13',
-    value: '13',
-  },
-];
+const modelsArray = ['6', '7', '8', 'X', 'XS', '11', '11 Pro', '12', '13'];
 
-export default function Filter() {
+export default function Filter({ products }) {
   const [searchParams, setSearchParams] = useSearchParams();
+
   const [filteredData, setFilteredData] = useState({
-    brands: brandsArray,
-    models: modelsArray,
+    brands: makeSlug(brandsArray),
+    models: makeSlug(modelsArray),
+    // brands: [...new Set(products?.map((product) => product.brand))],
+    // models: [...new Set(products?.map((product) => product.model))],
   });
 
   const handleSortChange = (event) => {
@@ -108,7 +86,7 @@ export default function Filter() {
       <Card title='Brands'>
         <input
           type='text'
-          className='px-1 py-2 mb-2 rounded-md bg-slate-200'
+          className='px-1 py-2 mb-2 rounded-md bg-slate-200 w-[100%]'
           placeholder='Search..'
           onChange={(e) => handleSearch(e, 'brands')}
         />
@@ -133,7 +111,7 @@ export default function Filter() {
       <Card title='Models'>
         <input
           type='text'
-          className='px-1 py-2 mb-2 rounded-md bg-slate-200'
+          className='px-1 py-2 mb-2 rounded-md bg-slate-200 w-[100%]'
           placeholder='Search..'
           onChange={(e) => handleSearch(e, 'models')}
         />

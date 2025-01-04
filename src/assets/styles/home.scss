@@ -1,6 +1,4 @@
 #home {
-  @apply flex justify-center text-black;
-
   .wrapper {
     @apply container px-2 lg:px-0 grid grid-cols-[220px,1fr,280px] gap-4 xl:gap-10;
     grid-template-areas: 'filter products summary';
@@ -11,7 +9,7 @@
     }
     #products_area {
       grid-area: products;
-      @apply grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-6;
+      @apply mt-6 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-6;
     }
     #summary_area {
       grid-area: summary;
@@ -28,14 +26,18 @@
   }
 
   .product {
-    @apply bg-white p-2 rounded-md shadow-md flex flex-col justify-between gap-2 cursor-pointer;
+    @apply bg-white p-2 rounded-sm shadow-md flex flex-col justify-between gap-2 cursor-pointer lg:max-h-[260px];
 
     img {
-      @apply w-full object-contain rounded-md max-h-[200px];
+      @apply w-full object-contain rounded-sm max-h-[200px];
     }
 
     &__info {
       @apply flex flex-col gap-2;
+
+      label {
+        @apply max-h-[20px] overflow-hidden inline-block text-ellipsis whitespace-nowrap;
+      }
 
       span {
         @apply text-[#2A59FE];
@@ -44,6 +46,23 @@
 
     button {
       @apply bg-[#2A59FE] text-white py-2 px-4 rounded-md;
+    }
+  }
+
+  .pagination {
+    @apply h-[70px] bottom-0 flex flex-wrap justify-center items-center gap-1 left-0;
+
+    button {
+      @apply px-2 border border-gray-300 cursor-pointer bg-white;
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+    }
+
+    button.active {
+      background-color: #007bff;
+      color: #fff;
     }
   }
 }
