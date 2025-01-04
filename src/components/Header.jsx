@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
+import { Link, useSearchParams } from 'react-router-dom';
 import Portfolio from '../assets/icons/Portfolio.svg';
 import Profile from '../assets/icons/Profile.svg';
-import { useSearchParams } from 'react-router-dom';
 
 export default function Header() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,7 +19,7 @@ export default function Header() {
   return (
     <header>
       <div className='wrapper'>
-        <h1>Vardabit</h1>
+        <Link to='/'>Vardabit</Link>
         <input
           onChange={handleSearchChange}
           type='text'

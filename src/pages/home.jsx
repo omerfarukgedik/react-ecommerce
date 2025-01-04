@@ -50,14 +50,15 @@ function Home() {
           <section id='products_area'>
             {isPending && <div>Loading...</div>}
             {error && <div>Error: {error.message}</div>}
-            {products
-              ?.slice(
-                (searchParams.get('page') - 1) * ITEMS_PER_PAGE,
-                searchParams.get('page') * ITEMS_PER_PAGE,
-              )
-              .map((product) => (
-                <Product key={`product_${product.id}`} product={product} />
-              ))}
+            {products.length > 0 &&
+              products
+                ?.slice(
+                  (searchParams.get('page') - 1) * ITEMS_PER_PAGE,
+                  searchParams.get('page') * ITEMS_PER_PAGE,
+                )
+                .map((product) => (
+                  <Product key={`product_${product.id}`} product={product} />
+                ))}
           </section>
 
           <Summary />
