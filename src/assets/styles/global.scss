@@ -28,7 +28,7 @@ header {
   @apply bg-[#2A59FE] flex justify-center fixed w-[100%];
 
   .wrapper {
-    @apply container p-2 xl:h-[50px] text-white grid gap-1 xl:gap-10 items-center grid-cols-[220px,1fr,220px];
+    @apply container p-2 xl:h-[50px] text-white grid gap-1 xl:gap-10 items-center grid-cols-[220px,1fr,280px];
     grid-template-areas: 'logo search actions';
 
     h1 {
@@ -42,7 +42,7 @@ header {
     }
 
     .actions {
-      @apply w-auto xl:w-[220px] flex justify-end items-center text-right gap-4;
+      @apply w-auto xl:w-[280px] flex justify-end items-center text-right gap-4;
       grid-area: actions;
     }
 

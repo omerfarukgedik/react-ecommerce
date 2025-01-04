@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import Product from '../components/Product';
 import { useEffect } from 'react';
 import Filter from '../components/Filter';
+import Summary from '../components/Summary';
 
 function Home() {
   const location = useLocation();
@@ -36,7 +37,7 @@ function Home() {
             <Product key={`product_${product.id}`} product={product} />
           ))}
         </section>
-        <section id='summary_area'>summary</section>
+        <Summary />
       </div>
     </main>
   );

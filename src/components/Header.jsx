@@ -1,9 +1,11 @@
+import { useSelector } from 'react-redux';
 import Portfolio from '../assets/icons/Portfolio.svg';
 import Profile from '../assets/icons/Profile.svg';
 import { useSearchParams } from 'react-router-dom';
 
 export default function Header() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const cart = useSelector((store) => store.cart);
 
   const handleSearchChange = (event) => {
     const { value } = event.target;
@@ -27,7 +29,7 @@ export default function Header() {
         <div className='actions'>
           <div className='flex items-center gap-2'>
             <img src={Portfolio} />
-            <label>1772.00 TL</label>
+            <label>{cart.totalPrice}</label>
           </div>
           <div className='flex items-center gap-2'>
             <img src={Profile} />

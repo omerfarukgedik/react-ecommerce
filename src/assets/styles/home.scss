@@ -2,7 +2,7 @@
   @apply flex justify-center text-black;
 
   .wrapper {
-    @apply container px-2 lg:px-0 grid grid-cols-[220px,1fr,220px] gap-1 xl:gap-10;
+    @apply container px-2 lg:px-0 grid grid-cols-[220px,1fr,280px] gap-4 xl:gap-10;
     grid-template-areas: 'filter products summary';
 
     #filter_area {
@@ -11,10 +11,11 @@
     }
     #products_area {
       grid-area: products;
-      @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xl:gap-6;
+      @apply grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-6;
     }
     #summary_area {
       grid-area: summary;
+      @apply grid grid-cols-1 lg:grid-cols-2 gap-2 py-5 lg:p-0 lg:flex lg:flex-col lg:gap-4;
     }
 
     @media screen and (max-width: 1024px) {

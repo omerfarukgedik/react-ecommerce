@@ -1,37 +1,54 @@
 import { createSlice } from '@reduxjs/toolkit';
+import useCurrency from '../hooks/useCurrency';
+
+function calculateTotalPrice(items) {
+  const total = items
+    .reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0)
+    .toFixed(2);
+
+  return useCurrency({ price: total });
+}
+
+function saveLocalStorage(state) {
+  localStorage.setItem('cart', JSON.stringify(state.items));
+  state.totalPrice = calculateTotalPrice(state.items);
+}
+
+const items = JSON.parse(localStorage.getItem('cart')) || [];
+const totalPrice = calculateTotalPrice(items);
 
 const initialState = {
-  items: [],
-  totalPrice: 0,
+  items,
+  totalPrice,
 };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state, action) => {
-      state.items.push(action.payload);
-      state.totalPrice = state.items.reduce(
-        (total, item) => total + item.price,
-        0,
-      );
+    addItem: (state, { payload }) => {
+      const item = state.items.find((item) => item.id === payload.id);
+
+      if (item) item.quantity += 1;
+      else state.items.push(payload);
+      saveLocalStorage(state);
     },
-    removeItem: (state, action) => {
-      state.items = state.items.filter((item) => item.id !== action.payload);
-      state.totalPrice = state.items.reduce(
-        (total, item) => total + item.price,
-        0,
-      );
+    increase: (state, { payload }) => {
+      const item = state.items.find((item) => item.id === payload.id);
+      item.quantity += 1;
+      saveLocalStorage(state);
     },
-    updateTotalPrice: (state) => {
-      state.totalPrice = state.items.reduce(
-        (total, item) => total + item.price,
-        0,
-      );
+    decrease: (state, { payload }) => {
+      const item = state.items.find((item) => item.id === payload.id);
+      if (item.quantity === 1)
+        state.items = state.items.filter((item) => item.id !== payload.id);
+      else item.quantity -= 1;
+
+      saveLocalStorage(state);
     },
   },
 });
 
-export const { addItem, removeItem, updateTotalPrice } = cartSlice.actions;
+export const { addItem, increase, decrease } = cartSlice.actions;
 
 export default cartSlice.reducer;
