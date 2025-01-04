@@ -23,7 +23,7 @@ export default function Detail() {
     error,
     data: product,
   } = useQuery({
-    queryKey: `products`,
+    queryKey: `product`,
     queryFn: () => fecthData(),
   });
 

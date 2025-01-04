@@ -3,37 +3,14 @@ import Card from './Card';
 import { useState } from 'react';
 import makeSlug from '../hooks/makeSlug';
 
-const sort = [
-  {
-    key: 'old_to_new',
-    value: 'Old to new',
-  },
-  {
-    key: 'new_to_old',
-    value: 'New to old',
-  },
-  {
-    key: 'price_high_to_low',
-    value: 'Price high to low',
-  },
-  {
-    key: 'price_low_to_high',
-    value: 'Price Low to high',
-  },
-];
-
-const brandsArray = ['Apple', 'Samsung', 'Huawei', 'Xiaomi Redmi'];
-
-const modelsArray = ['6', '7', '8', 'X', 'XS', '11', '11 Pro', '12', '13'];
-
-export default function Filter({ products }) {
+export default function Filter({ products, sort }) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const brandsArray = [...new Set(products?.map((product) => product.brand))];
+  const modelsArray = [...new Set(products?.map((product) => product.model))];
 
   const [filteredData, setFilteredData] = useState({
     brands: makeSlug(brandsArray),
     models: makeSlug(modelsArray),
-    // brands: [...new Set(products?.map((product) => product.brand))],
-    // models: [...new Set(products?.map((product) => product.model))],
   });
 
   const handleSortChange = (event) => {
@@ -59,7 +36,8 @@ export default function Filter({ products }) {
 
   const handleSearch = (event, type) => {
     const { value } = event.target;
-    const filtered = filteredData?.[type].filter((f) => {
+    const arr = type === 'brands' ? brandsArray : modelsArray;
+    const filtered = makeSlug(arr).filter((f) => {
       return f.value.toLowerCase().includes(value.toLowerCase());
     });
     setFilteredData((f) => ({ ...f, [type]: filtered }));
