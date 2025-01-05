@@ -13,6 +13,7 @@ A modern, responsive e-commerce application built with React, Redux Toolkit, and
   - Advanced filtering by brand and model
   - Sort products by price and date
   - Real-time search functionality
+  - Filter from url
 
 - **Shopping Cart**
 

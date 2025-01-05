@@ -40,6 +40,13 @@ function Home() {
     return await fetch(API_URL).then((res) => res.json());
   }
 
+  const handlePageChange = (page) => {
+    setSearchParams((params) => {
+      params.set('page', page);
+      return params;
+    });
+  };
+
   const {
     isPending,
     error,
@@ -58,6 +65,12 @@ function Home() {
     // filter data
     const filteredData = products?.filter((item) => {
       return Object.keys(filterObject).every((key) => {
+        // if (
+        //   ['search', 'brands', 'models'].includes(key) &&
+        //   filterObject.page != 1
+        // )
+        //   handlePageChange(1);
+
         if (key === 'search')
           return item.name
             .toLowerCase()
@@ -75,29 +88,17 @@ function Home() {
     });
 
     // sorting data
-    const sortedData = filteredData?.sort((a, b) => {
-      if (filterObject.sort === 'old_to_new') return a.id - b.id;
-      if (filterObject.sort === 'new_to_old') return b.id - a.id;
-      if (filterObject.sort === 'price_high_to_low') return b.price - a.price;
-      if (filterObject.sort === 'price_low_to_high') return a.price - b.price;
-      // return filterObject[]
-      return a.id - b.id;
-    });
+    const findSortAction = sort.find((s) => s.key == filterObject?.sort);
+    const sortedData = filteredData?.sort((a, b) => findSortAction?.fn(a, b));
 
     setTotalProducts(sortedData?.length);
 
+    // make pagination
     return sortedData?.slice(
       (filterObject.page - 1) * ITEMS_PER_PAGE,
       filterObject.page * ITEMS_PER_PAGE,
     );
   }, [searchParams, products]);
-
-  const handlePageChange = (page) => {
-    setSearchParams((params) => {
-      params.set('page', page);
-      return params;
-    });
-  };
 
   useEffect(() => {
     const page = searchParams.get('page') || 1;
@@ -113,6 +114,12 @@ function Home() {
           <section id='products_area'>
             {isPending && <div>Loading...</div>}
             {error && <div>Error: {error.message}</div>}
+            {filteredData?.length == 0 && (
+              <div className='flex items-center justify-center h-10 col-span-4 bg-white rounded-sm text-[1.2rem] text-red-500 font-bold'>
+                No record found on this page {searchParams.get('page')}
+              </div>
+            )}
+
             {products &&
               filteredData?.map((product) => (
                 <Product key={`product_${product.id}`} product={product} />
@@ -122,7 +129,7 @@ function Home() {
           <Summary />
         </div>
       </div>
-      {!error && !isPending && (
+      {!error && !isPending && totalProducts != 0 && (
         <Pagination
           totalItems={totalProducts}
           itemsPerPage={ITEMS_PER_PAGE}
