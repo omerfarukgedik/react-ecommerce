@@ -19,7 +19,7 @@ export default function Header() {
   return (
     <header>
       <div className='wrapper'>
-        <Link to='/'>Vardabit</Link>
+        <Link to='/?page=1'>Vardabit</Link>
         <input
           onChange={handleSearchChange}
           type='text'

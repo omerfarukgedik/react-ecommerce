@@ -4,7 +4,6 @@ export default function Pagination({
   currentPage,
   onPageChange,
 }) {
-  console.log('totalItems:', totalItems);
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const handleClick = (page) => {

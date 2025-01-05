@@ -23,7 +23,7 @@ export default function Detail() {
     error,
     data: product,
   } = useQuery({
-    queryKey: `product`,
+    queryKey: [`product`],
     queryFn: () => fecthData(),
   });
 
@@ -32,7 +32,7 @@ export default function Detail() {
   };
 
   const productQuantity = useMemo(
-    () => cart.items.find((item) => item.id === product?.id)?.quantity,
+    () => cart.items.find((item) => item.id === product?.id)?.quantity || 0,
     [cart.items, product?.id],
   );
 

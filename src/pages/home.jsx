@@ -45,7 +45,7 @@ function Home() {
     error,
     data: products,
   } = useQuery({
-    queryKey: `products`,
+    queryKey: [`products`],
     queryFn: () => fecthData(),
   });
 

@@ -9,7 +9,7 @@
     }
     #products_area {
       grid-area: products;
-      @apply mt-6 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-6;
+      @apply mt-6 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 xl:gap-6 grid-rows-[350px] lg:grid-rows-[300px];
     }
     #summary_area {
       grid-area: summary;
