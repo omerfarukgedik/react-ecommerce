@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import Portfolio from '../assets/icons/Portfolio.svg';
 import Profile from '../assets/icons/Profile.svg';
 
 export default function Header() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { pathname } = useLocation();
   const cart = useSelector((store) => store.cart);
 
   const handleSearchChange = (event) => {
@@ -19,13 +20,15 @@ export default function Header() {
   return (
     <header>
       <div className='wrapper'>
-        <Link to='/?page=1'>Vardabit</Link>
-        <input
-          onChange={handleSearchChange}
-          type='text'
-          placeholder='Search..'
-          defaultValue={searchParams.get('search')}
-        />
+        <Link to='/?page=1'>E-Commerce</Link>
+        {pathname == '/' && (
+          <input
+            onChange={handleSearchChange}
+            type='text'
+            placeholder='Search..'
+            defaultValue={searchParams.get('search')}
+          />
+        )}
         <div className='actions'>
           <div className='flex items-center gap-2'>
             <img src={Portfolio} />

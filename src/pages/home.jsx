@@ -75,7 +75,7 @@ function Home() {
           return item.name
             .toLowerCase()
             .includes(filterObject[key].toLowerCase());
-        else if (key === 'brands' || key === 'models') {
+        else if (['brands', 'models'].includes(key)) {
           return filterObject[key]
             .split(',')
             .includes(
